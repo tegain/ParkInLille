@@ -14,7 +14,7 @@ class _AppShellState extends State<AppShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: HomeScreen(title: 'ParkLille'),
+       body: HomeScreen(title: 'ParkInLille'),
       bottomNavigationBar: BottomNavigationBar(items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.explore),

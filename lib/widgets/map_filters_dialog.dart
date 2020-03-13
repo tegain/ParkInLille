@@ -27,16 +27,16 @@ class _MapFiltersDialogState extends State<MapFiltersDialog> {
               child: Material(
                 child: Column(
                   children: <Widget>[
-                    SwitchListTile(
-                      title: Text('Activer la 3D'),
-                      value: show3d,
-                      onChanged: (bool value) {
-                        setState(() {
-                          show3d = value;
-                        });
-                      },
-                      secondary: Icon(Icons.threed_rotation),
-                    ),
+//                    SwitchListTile(
+//                      title: Text('Activer la 3D'),
+//                      value: show3d,
+//                      onChanged: (bool value) {
+//                        setState(() {
+//                          show3d = value;
+//                        });
+//                      },
+//                      secondary: Icon(Icons.threed_rotation),
+//                    ),
                     SwitchListTile(
                       title: Text('Afficher les parkings fermés'),
                       value: showClosedParkings,
