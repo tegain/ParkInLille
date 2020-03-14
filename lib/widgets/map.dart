@@ -4,17 +4,20 @@ import 'package:parklille/types/types.dart';
 
 class Map extends StatelessWidget {
   final Function onMapCreated;
+  final Function onStyleLoaded;
 
-  Map({ Key key, @required this.onMapCreated }) : super(key: key);
+  Map({ Key key, @required this.onMapCreated, @required this.onStyleLoaded }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MapboxMap(
       onMapCreated: onMapCreated,
+      myLocationEnabled: true,
       initialCameraPosition: const CameraPosition(
         target: LatLng(MapCenter.latitude, MapCenter.longitude),
         zoom: 12,
       ),
+      onStyleLoadedCallback: onStyleLoaded,
       styleString: MapboxStyles.MAPBOX_STREETS,
     );
   }
