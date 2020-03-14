@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:parklille/app_shell.dart';
 
 Future<void> main() async {
-  await DotEnv().load('.env');
+  WidgetsFlutterBinding.ensureInitialized();
+  Map toto = await FlutterConfig.loadEnvVariables();
+  print(toto);
   return runApp(Main());
 }
 
