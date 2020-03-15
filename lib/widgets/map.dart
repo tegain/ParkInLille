@@ -2,14 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:parklille/types/types.dart';
+import 'package:parklille/models/feature.dart';
+import 'package:parklille/services/features.dart';
+import 'package:parklille/types/map.dart';
 import 'package:latlong/latlong.dart';
 
 class Map extends StatelessWidget {
-  Map({ Key key }) : super(key: key);
+  Map({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Features.getFeatures();
     return FlutterMap(
       options: MapOptions(
         center: LatLng(MapCenter.latitude, MapCenter.longitude),
@@ -25,18 +28,31 @@ class Map extends StatelessWidget {
           },
         ),
         MarkerLayerOptions(
-          markers: [
-            Marker(
-              width: 80.0,
-              height: 80.0,
-              point: LatLng(MapCenter.latitude, MapCenter.longitude),
-              builder: (BuildContext ctx) => Container(
-                child: FlutterLogo(),
-              ),
-            ),
-          ],
+          markers: _getMarkers(),
         ),
       ],
     );
+  }
+
+  void showMarkerDialog(Feature feature) {
+    print(feature.fields.libelle);
+  }
+
+  List<Marker> _getMarkers() {
+    return List.generate(Features.getFeatures().length, (index) {
+      return Marker(
+        width: 80.0,
+        height: 80.0,
+        point: Features.getFeatures()[index].getLatLng(),
+        builder: (BuildContext ctx) => Container(
+          child: InkWell(
+            onTap: () {
+              showMarkerDialog(Features.getFeatures()[index]);
+            },
+            child: FlutterLogo(),
+          ),
+        ),
+      );
+    });
   }
 }
