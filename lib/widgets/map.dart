@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_map/flutter_map.dart';
+
 import 'package:parklille/models/feature.dart';
 import 'package:parklille/services/features.dart';
-import 'package:parklille/types/map.dart';
+import 'package:parklille/types/map_center.dart';
 import 'package:latlong/latlong.dart';
 
 class Map extends StatelessWidget {
@@ -12,7 +13,7 @@ class Map extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Features.getFeatures();
+    FeaturesService.getFeatures();
     return FlutterMap(
       options: MapOptions(
         center: LatLng(MapCenter.latitude, MapCenter.longitude),
@@ -39,15 +40,15 @@ class Map extends StatelessWidget {
   }
 
   List<Marker> _getMarkers() {
-    return List.generate(Features.getFeatures().length, (index) {
+    return List.generate(FeaturesService.getFeatures().length, (int index) {
       return Marker(
         width: 80.0,
         height: 80.0,
-        point: Features.getFeatures()[index].getLatLng(),
+        point: FeaturesService.getFeatures()[index].getLatLng(),
         builder: (BuildContext ctx) => Container(
           child: InkWell(
             onTap: () {
-              showMarkerDialog(Features.getFeatures()[index]);
+              showMarkerDialog(FeaturesService.getFeatures()[index]);
             },
             child: FlutterLogo(),
           ),
