@@ -21,8 +21,7 @@ dependencies:
     sdk: flutter
   flutter_config: 1.0.5
   flutter_map: 0.8.2
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  user_location: 0.1.2
   cupertino_icons: ^0.1.2
 
 dev_dependencies:

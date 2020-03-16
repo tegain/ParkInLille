@@ -4,8 +4,7 @@ import 'package:parklille/app_shell.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Map toto = await FlutterConfig.loadEnvVariables();
-  print(toto);
+  await FlutterConfig.loadEnvVariables();
   return runApp(Main());
 }
 
@@ -22,5 +21,3 @@ class Main extends StatelessWidget {
     );
   }
 }
-
-
