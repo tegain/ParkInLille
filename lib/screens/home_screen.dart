@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Stack(
       children: <Widget>[
         Map(),
-        MapFilters(),
+        MapFilters(bottom: 72, right: 16),
       ],
     ));
   }

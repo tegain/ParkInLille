@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:parklille/widgets/map_filters_dialog.dart';
 
 class MapFilters extends StatelessWidget {
-  final double top = null;
-  final double left = null;
-  final double bottom = 24.0;
-  final double right = 24.0;
+  final double top;
+  final double left;
+  final double bottom;
+  final double right;
   final bool show3d;
 
-  MapFilters({Key key, double top, double left, double right, double bottom, this.show3d})
+  MapFilters({Key key, this.top, this.left, this.right = 24, this.bottom = 24, this.show3d})
       : super(key: key);
 
   @override
