@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:parklille/models/feature_fields.dart';
 import 'package:latlong/latlong.dart';
 import 'package:parklille/types/parking_color.dart';
+import 'package:intl/intl.dart';
 
 class Feature {
   String datasetId;
@@ -50,5 +51,10 @@ class Feature {
       return ParkingAvailabilityColor.hurry;
     }
     return ParkingAvailabilityColor.full;
+  }
+
+  String getUpdatedTime() {
+    final dateFormat = DateFormat('dd-MM-yyyy hh:mm');
+    return dateFormat.format(DateTime.parse(fields.datemaj));
   }
 }

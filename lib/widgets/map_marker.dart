@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import 'package:parklille/models/feature.dart';
 import 'package:parklille/services/features.dart';
 import 'package:parklille/widgets/triangle_painter.dart';
 
 class MapMarkers {
-  List<Marker> buildMarkers() {
+  List<Marker> buildMarkers({Function onClickMarker}) {
     const double markerWidth = 88;
     const double markerHeight = 36;
     const double arrowHeight = 6;
@@ -30,7 +29,7 @@ class MapMarkers {
                   width: markerWidth,
                   child: InkWell(
                     onTap: () {
-                      _showMarkerDialog(feature);
+                      onClickMarker(feature);
                     },
                     child: DecoratedBox(
                         decoration: BoxDecoration(
@@ -85,9 +84,5 @@ class MapMarkers {
         },
       );
     });
-  }
-
-  void _showMarkerDialog(Feature feature) {
-    print(feature.fields.libelle);
   }
 }
