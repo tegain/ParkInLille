@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geolocator/geolocator.dart';
+
 import 'package:parklille/widgets/map_marker.dart';
-import 'package:user_location/user_location.dart';
+import 'package:parklille/widgets/user_marker.dart';
 import 'package:latlong/latlong.dart';
 
 import 'package:parklille/services/features.dart';
@@ -14,44 +16,19 @@ import 'package:parklille/types/map_center.dart';
 class Map extends StatelessWidget {
   final Function onClickMarker;
   final MapController mapController = MapController();
-  UserLocationOptions userLocationOptions;
-  StreamController<LatLng> markerLocationStream = StreamController();
 
-  Map({Key key, @required this.onClickMarker}) : super(key: key);
+  Position userLocation;
+
+  Map({Key key, @required this.onClickMarker, @required this.userLocation}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     FeaturesService.getFeatures();
-    markerLocationStream.stream.listen((onData) {
-      print('ON DATA ${onData.latitude}');
-    });
-    userLocationOptions = UserLocationOptions(
-        context: context,
-        mapController: mapController,
-        markers: MapMarkers().buildMarkers(),
-        zoomToCurrentLocationOnLoad: true,
-        onLocationUpdate: (LatLng pos) => print("onLocationUpdate ${pos.toString()}"),
-        moveToCurrentLocationFloatingActionButton: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(24.0),
-              boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 4, offset: Offset.fromDirection(1) )]),
-          child: Icon(
-            Icons.my_location,
-          ),
-        ),
-        fabRight: 17,
-        fabWidth: 46,
-        fabHeight: 46
-    );
 
     return FlutterMap(
       options: MapOptions(
         center: LatLng(MapCenter.latitude, MapCenter.longitude),
-        zoom: 11,
-        plugins: [
-          UserLocationPlugin(),
-        ],
+        zoom: 2,
       ),
       layers: [
         TileLayerOptions(
@@ -63,9 +40,11 @@ class Map extends StatelessWidget {
           },
         ),
         MarkerLayerOptions(
-          markers: MapMarkers().buildMarkers(onClickMarker: onClickMarker),
+          markers: [
+            ...MapMarkers().buildMarkers(onClickMarker: onClickMarker),
+            UserMarker(position: userLocation).getMarker(),
+          ],
         ),
-        userLocationOptions
       ],
       mapController: mapController,
     );
