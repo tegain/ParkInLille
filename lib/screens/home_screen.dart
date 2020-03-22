@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:parklille/models/feature.dart';
+import 'package:parklille/types/map_center.dart';
 import 'package:parklille/widgets/map.dart';
 import 'package:parklille/widgets/map_filters.dart';
 import 'package:parklille/widgets/map_marker_dialog.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong/latlong.dart';
+import 'package:parklille/widgets/my_location_button.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -22,8 +26,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final MapController mapController = MapController();
   Feature selectedFeature;
   Position userCurrentLocation;
+  LatLng mapCenter = LatLng(MapCenter.latitude, MapCenter.longitude);
 
   @override
   void initState() {
@@ -47,13 +53,16 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Stack(
       children: <Widget>[
         Map(
-          onClickMarker: _displayMarkerDialog,
+          mapController: mapController,
+          mapCenter: mapCenter,
           userLocation: userCurrentLocation,
+          onClickMarker: _displayMarkerDialog,
         ),
         selectedFeature != null
             ? MapMarkerDialog(feature: selectedFeature, onCloseDialog: _resetSelectedFeature)
             : null,
         MapFilters(bottom: 72, right: 16),
+        MyLocationButton(onTap: _centerMapToUser, bottom: 16, right: 16),
       ].where(_notNull).toList(),
     ));
   }
@@ -70,12 +79,22 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> _setCurrentPosition() async {
+  Future<Position> _setCurrentPosition() async {
     var position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     setState(() {
       userCurrentLocation = position;
     });
+    return position;
   }
 
   bool _notNull(Object o) => o != null;
+
+  Future<void> _centerMapToUser() async {
+    var position = await _setCurrentPosition();
+    var center = LatLng(position.latitude, position.longitude);
+    setState(() {
+      mapCenter = center;
+    });
+    mapController.move(center, 11);
+  }
 }

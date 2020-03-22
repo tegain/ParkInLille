@@ -1,14 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:parklille/widgets/map_filters_dialog.dart';
 
-class MapFilters extends StatelessWidget {
+class MyLocationButton extends StatelessWidget {
   final double top;
   final double left;
   final double bottom;
   final double right;
+  final Function onTap;
 
-  MapFilters({Key key, this.top, this.left, this.right = 24, this.bottom = 24})
+  MyLocationButton({Key key, @required this.onTap, this.top, this.left, this.right = 24, this.bottom = 24})
       : super(key: key);
 
   @override
@@ -27,23 +26,12 @@ class MapFilters extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(12.0),
               child: Icon(
-                Icons.tune,
+                Icons.my_location,
                 size: 24.0,
               ),
             ),
-            onTap: () {
-              _showDialog(context);
-            },
+            onTap: onTap,
           ),
         ));
-  }
-
-  void _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return MapFiltersDialog();
-      },
-    );
   }
 }

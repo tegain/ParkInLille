@@ -7,8 +7,8 @@ import 'package:parklille/types/map_center.dart';
 class UserMarker {
   Position position;
 
-  final double markerWidth = 80;
-  final double markerHeight = 80;
+  final double markerWidth = 18;
+  final double markerHeight = 18;
 
   UserMarker({ @required this.position });
 
@@ -22,21 +22,32 @@ class UserMarker {
       point: LatLng(latitude, longitude),
       anchorPos: AnchorPos.align(AnchorAlign.top),
       builder: (BuildContext ctx) {
-        return InkWell(
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                top: 0,
-                height: markerHeight,
-                width: markerWidth,
-                child: InkWell(
-                  onTap: () {
-                    print('click user marker');
-                  },
-                  child: Icon(Icons.directions_car),
-                ),
+        return Container(
+          width: markerWidth,
+          height: markerHeight,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.white, width: 2),
+            color: Colors.lightBlue,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                offset: Offset(0, 3),
+                blurRadius: 4,
               ),
-            ],
+              BoxShadow(
+                color: Color(0xFF4FC3F7).withOpacity(0.3),
+                offset: Offset(0, 0),
+                spreadRadius: 12,
+                blurRadius: 0,
+              ),
+              BoxShadow(
+                color: Color(0xFF4FC3F7).withOpacity(0.3),
+                offset: Offset(0, 0),
+                spreadRadius: 24,
+                blurRadius: 0,
+              )
+            ]
           ),
         );
       },

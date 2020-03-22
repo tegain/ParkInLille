@@ -11,15 +11,15 @@ import 'package:parklille/widgets/user_marker.dart';
 import 'package:latlong/latlong.dart';
 
 import 'package:parklille/services/features.dart';
-import 'package:parklille/types/map_center.dart';
 
 class Map extends StatelessWidget {
   final Function onClickMarker;
-  final MapController mapController = MapController();
+  final MapController mapController;
+  final LatLng mapCenter;
 
   Position userLocation;
 
-  Map({Key key, @required this.onClickMarker, @required this.userLocation}) : super(key: key);
+  Map({Key key, @required this.mapController, @required this.onClickMarker, @required this.userLocation, @required this.mapCenter}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class Map extends StatelessWidget {
 
     return FlutterMap(
       options: MapOptions(
-        center: LatLng(MapCenter.latitude, MapCenter.longitude),
+        center: mapCenter,
         zoom: 2,
       ),
       layers: [
