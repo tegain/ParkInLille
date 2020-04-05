@@ -6,8 +6,9 @@ import 'package:parklille/extensions/string_extension.dart';
 class MapMarkerDialog extends StatefulWidget {
   final Feature feature;
   final Function onCloseDialog;
+  final Function({ Feature to }) onTriggerNavigation;
 
-  MapMarkerDialog({Key key, @required this.onCloseDialog, @required this.feature}) : super(key: key);
+  MapMarkerDialog({Key key, @required this.onTriggerNavigation, @required this.onCloseDialog, @required this.feature}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -77,7 +78,9 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                         ],
                       ),
                       InkWell(
-                        onTap: _triggerNavigation,
+                        onTap: () {
+                          widget.onTriggerNavigation(to: widget.feature);
+                        },
                         child: Icon(Icons.directions, size: 54, color: Colors.cyan,),
                       )
                     ],
@@ -141,8 +144,4 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
   }
 
   bool _notNull(Object o) => o != null;
-
-  void _triggerNavigation() {
-    print('Navigation');
-  }
 }

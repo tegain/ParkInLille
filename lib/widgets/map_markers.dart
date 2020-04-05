@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:parklille/models/feature.dart';
 
-import 'package:parklille/services/features.dart';
 import 'package:parklille/widgets/triangle_painter.dart';
 
 class MapMarkers {
-  List<Marker> buildMarkers({Function onClickMarker}) {
+  List<Marker> buildMarkers({Function onClickMarker, List<Feature> features}) {
     const double markerWidth = 88;
     const double markerHeight = 36;
     const double arrowHeight = 6;
 
-    return List.generate(FeaturesService.getFeatures().length, (int index) {
-      var feature = FeaturesService.getFeatures()[index];
+    return List.generate(features.length, (int index) {
+      var feature = features[index];
       Color availabilityColor = feature.getAvailabilityColor(feature.getAvailabilityPercentage());
 
       return Marker(

@@ -25,6 +25,7 @@ dependencies:
   location: ^2.3.5
   geolocator: ^5.3.0
   cupertino_icons: ^0.1.2
+  provider: ^3.0.0
 
 dev_dependencies:
   flutter_test:

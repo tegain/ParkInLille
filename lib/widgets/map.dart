@@ -6,11 +6,12 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 
-import 'package:parklille/widgets/map_marker.dart';
+import 'package:parklille/widgets/map_markers.dart';
 import 'package:parklille/widgets/user_marker.dart';
 import 'package:latlong/latlong.dart';
 
 import 'package:parklille/services/features.dart';
+import 'package:provider/provider.dart';
 
 class Map extends StatelessWidget {
   final Function onClickMarker;
@@ -23,12 +24,12 @@ class Map extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FeaturesService.getFeatures();
+    FeaturesService featuresService = Provider.of<FeaturesService>(context);
 
     return FlutterMap(
       options: MapOptions(
         center: mapCenter,
-        zoom: 2,
+        zoom: 9,
       ),
       layers: [
         TileLayerOptions(
@@ -41,7 +42,7 @@ class Map extends StatelessWidget {
         ),
         MarkerLayerOptions(
           markers: [
-            ...MapMarkers().buildMarkers(onClickMarker: onClickMarker),
+            ...MapMarkers().buildMarkers(onClickMarker: onClickMarker, features: featuresService.getFeatures()),
             UserMarker(position: userLocation).getMarker(),
           ],
         ),
