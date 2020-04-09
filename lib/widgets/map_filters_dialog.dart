@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:parklille/services/features.dart';
 import 'package:provider/provider.dart';
+import 'package:parklille/services/features.dart';
 
 class MapFiltersDialog extends StatelessWidget {
   @override

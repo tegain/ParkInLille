@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong/latlong.dart';
+
 import 'package:parklille/models/feature.dart';
 import 'package:parklille/types/map_center.dart';
 import 'package:parklille/widgets/map.dart';
 import 'package:parklille/widgets/map_filters.dart';
 import 'package:parklille/widgets/map_marker_dialog.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:latlong/latlong.dart';
 import 'package:parklille/widgets/my_location_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -68,7 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
           onClickMarker: _displayMarkerDialog,
         ),
         selectedFeature != null
-            ? MapMarkerDialog(feature: selectedFeature, onCloseDialog: _resetSelectedFeature, onTriggerNavigation: _startNavigation,)
+            ? MapMarkerDialog(
+                feature: selectedFeature,
+                onCloseDialog: _resetSelectedFeature,
+                onTriggerNavigation: _startNavigation,
+              )
             : null,
         MapFilters(bottom: 72, right: 16),
         MyLocationButton(onTap: _centerMapToUser, bottom: 16, right: 16),
@@ -128,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await _directions.platformVersion;
-    } on PlatformException catch(e) {
+    } on PlatformException catch (e) {
       platformVersion = 'Failed to get platform version.';
     }
 
@@ -137,9 +142,11 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> _startNavigation({ Feature to }) async {
-    final origin = Location(name: 'Ma position', latitude: userCurrentLocation.latitude, longitude: userCurrentLocation.longitude);
-    final destination = Location(name: to.getLabel(), latitude: to.getLatLng().latitude, longitude: to.getLatLng().longitude);
+  Future<void> _startNavigation({Feature to}) async {
+    final origin =
+        Location(name: 'Ma position', latitude: userCurrentLocation.latitude, longitude: userCurrentLocation.longitude);
+    final destination =
+        Location(name: to.getLabel(), latitude: to.getLatLng().latitude, longitude: to.getLatLng().longitude);
 
     await _directions.startNavigation(
         origin: origin,

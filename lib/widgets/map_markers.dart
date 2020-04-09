@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:parklille/models/feature.dart';
 
+import 'package:parklille/models/feature.dart';
 import 'package:parklille/widgets/triangle_painter.dart';
 
 class MapMarkers {

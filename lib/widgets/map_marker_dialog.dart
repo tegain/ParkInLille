@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:parklille/models/feature.dart';
 import 'package:parklille/extensions/string_extension.dart';
 
 class MapMarkerDialog extends StatefulWidget {
   final Feature feature;
   final Function onCloseDialog;
-  final Function({ Feature to }) onTriggerNavigation;
+  final Function({Feature to}) onTriggerNavigation;
 
-  MapMarkerDialog({Key key, @required this.onTriggerNavigation, @required this.onCloseDialog, @required this.feature}) : super(key: key);
+  MapMarkerDialog({Key key, @required this.onTriggerNavigation, @required this.onCloseDialog, @required this.feature})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -22,9 +23,9 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        bottom: 24,
-        left: 24,
-        right: 84,
+        bottom: 20,
+        left: 20,
+        right: 78,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(6)),
@@ -33,7 +34,7 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
           child: InkWell(
             onTap: _onTapDialog,
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(16),
               child: Column(
                 children: [
                   Row(
@@ -45,15 +46,17 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                           Padding(
                               padding: EdgeInsets.only(bottom: 8),
                               child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  widget.feature.getLabel(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 22,
-                                  ),
-                                ),
-                              )),
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    width: 214,
+                                    child: Text(
+                                      widget.feature.getLabel(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ))),
                           Row(
                             children: [
                               Container(
@@ -72,7 +75,8 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                                 Icons.directions_car,
                                 size: 18,
                               ),
-                              Text('${widget.feature.getAvailability()} places', style: TextStyle(color: Colors.black54)),
+                              Text('${widget.feature.getAvailability()} places',
+                                  style: TextStyle(color: Colors.black54)),
                             ],
                           ),
                         ],
@@ -81,7 +85,11 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                         onTap: () {
                           widget.onTriggerNavigation(to: widget.feature);
                         },
-                        child: Icon(Icons.directions, size: 54, color: Colors.cyan,),
+                        child: Icon(
+                          Icons.directions,
+                          size: 54,
+                          color: Colors.cyan,
+                        ),
                       )
                     ],
                   ),
@@ -109,7 +117,11 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                                         children: <Widget>[
                                           Padding(
                                             padding: EdgeInsets.only(right: 8),
-                                            child: Icon(Icons.local_parking, color: Colors.black26, size: 18,),
+                                            child: Icon(
+                                              Icons.local_parking,
+                                              color: Colors.black26,
+                                              size: 18,
+                                            ),
                                           ),
                                           Text('Places max. : ${widget.feature.fields.max}'),
                                         ],
@@ -119,7 +131,11 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                                       children: <Widget>[
                                         Padding(
                                           padding: EdgeInsets.only(right: 8),
-                                          child: Icon(Icons.pin_drop, color: Colors.black26, size: 18,),
+                                          child: Icon(
+                                            Icons.pin_drop,
+                                            color: Colors.black26,
+                                            size: 18,
+                                          ),
                                         ),
                                         Text('${widget.feature.fields.adresse}, ${widget.feature.fields.ville}'),
                                       ],

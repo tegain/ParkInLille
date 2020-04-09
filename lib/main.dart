@@ -7,10 +7,16 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterConfig.loadEnvVariables();
-  return runApp(ChangeNotifierProvider(
-    create: (context) => FeaturesService(),
-    child: Main(),
-  ),);
+
+  FeaturesService featuresService = FeaturesService();
+  await featuresService.fetchFeatures();
+
+  return runApp(
+    ChangeNotifierProvider(
+      create: (context) => featuresService,
+      child: Main(),
+    ),
+  );
 }
 
 class Main extends StatelessWidget {

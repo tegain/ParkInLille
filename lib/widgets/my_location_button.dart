@@ -18,8 +18,7 @@ class MyLocationButton extends StatelessWidget {
         left: left,
         top: top,
         child: Material(
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
           elevation: 2.0,
           child: InkWell(
             radius: 20.0,

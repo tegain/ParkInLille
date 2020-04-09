@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:parklille/widgets/map_filters_dialog.dart';
 
 class MapFilters extends StatelessWidget {
@@ -8,8 +8,7 @@ class MapFilters extends StatelessWidget {
   final double bottom;
   final double right;
 
-  MapFilters({Key key, this.top, this.left, this.right = 24, this.bottom = 24})
-      : super(key: key);
+  MapFilters({Key key, this.top, this.left, this.right = 24, this.bottom = 24}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +18,7 @@ class MapFilters extends StatelessWidget {
         left: left,
         top: top,
         child: Material(
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
           elevation: 2.0,
           child: InkWell(
             radius: 20.0,

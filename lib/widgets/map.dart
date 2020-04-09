@@ -1,17 +1,13 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong/latlong.dart';
+import 'package:provider/provider.dart';
 
 import 'package:parklille/widgets/map_markers.dart';
 import 'package:parklille/widgets/user_marker.dart';
-import 'package:latlong/latlong.dart';
-
 import 'package:parklille/services/features.dart';
-import 'package:provider/provider.dart';
 
 class Map extends StatelessWidget {
   final Function onClickMarker;
@@ -20,7 +16,13 @@ class Map extends StatelessWidget {
 
   Position userLocation;
 
-  Map({Key key, @required this.mapController, @required this.onClickMarker, @required this.userLocation, @required this.mapCenter}) : super(key: key);
+  Map(
+      {Key key,
+      @required this.mapController,
+      @required this.onClickMarker,
+      @required this.userLocation,
+      @required this.mapCenter})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class Map extends StatelessWidget {
     return FlutterMap(
       options: MapOptions(
         center: mapCenter,
-        zoom: 9,
+        zoom: 11,
       ),
       layers: [
         TileLayerOptions(

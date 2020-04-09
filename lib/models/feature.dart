@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:parklille/models/feature_fields.dart';
 import 'package:latlong/latlong.dart';
-import 'package:parklille/types/parking_color.dart';
 import 'package:intl/intl.dart';
+
+import 'package:parklille/models/feature_fields.dart';
+import 'package:parklille/types/parking_color.dart';
 
 class Feature {
   String datasetId;
@@ -10,11 +11,7 @@ class Feature {
   String recordTimestamp;
   FeatureFields fields;
 
-  Feature(
-      {String datasetId,
-      String recordId,
-      @required dynamic fields,
-      String recordTimestamp})
+  Feature({String datasetId, String recordId, @required dynamic fields, String recordTimestamp})
       : this.datasetId = datasetId,
         this.recordId = recordId,
         this.fields = FeatureFields.fromJson(fields),
@@ -31,9 +28,7 @@ class Feature {
 
   String getLabel() => fields.libelle;
 
-  LatLng getLatLng() => LatLng(
-    fields.geometry.coordinates[1], fields.geometry.coordinates[0]
-  );
+  LatLng getLatLng() => LatLng(fields.geometry.coordinates[1], fields.geometry.coordinates[0]);
 
   String getAvailability() => fields.dispo.toString();
 
