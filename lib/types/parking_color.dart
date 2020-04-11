@@ -9,6 +9,6 @@ class ParkingAvailabilityColor {
 
 class ParkingStateColor {
   static final Color open = Colors.green;
-  static final Color closed = Colors.amber;
-  static final Color full = Colors.red;
+  static final Color closed = Colors.red;
+  static final Color full = Colors.black87;
 }

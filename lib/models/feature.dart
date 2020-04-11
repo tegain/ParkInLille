@@ -36,6 +36,18 @@ class Feature {
     return (fields.dispo * 100 / fields.max).roundToDouble() / 100;
   }
 
+  bool isClosed() {
+    return fields.etat == 'FERME';
+  }
+
+  bool isFull() {
+    return fields.etat == 'COMPLET';
+  }
+
+  bool isOpen() {
+    return fields.etat == 'OUVERT';
+  }
+
   Color getAvailabilityColor(double availabilityPercentage) {
     double availability = availabilityPercentage * 100;
 
@@ -46,6 +58,23 @@ class Feature {
       return ParkingAvailabilityColor.hurry;
     }
     return ParkingAvailabilityColor.full;
+  }
+
+  String getAvailabilityLabel() {
+    if (isFull() || isClosed()) {
+      return fields.etat;
+    }
+    return getAvailability();
+  }
+
+  Color getParkingColor() {
+    if (isFull()) {
+      return ParkingStateColor.full;
+    }
+    if (isClosed()) {
+      return ParkingStateColor.closed;
+    }
+    return ParkingStateColor.open;
   }
 
   String getUpdatedTime() {

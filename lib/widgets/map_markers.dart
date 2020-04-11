@@ -49,24 +49,40 @@ class MapMarkers {
                               width: markerWidth,
                               height: markerHeight,
                               child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    width: 24,
-                                    height: 24,
-                                    child: CircularProgressIndicator(
-                                      value: feature.getAvailabilityPercentage(),
-                                      strokeWidth: 4,
-                                      backgroundColor: Colors.white,
-                                      valueColor: AlwaysStoppedAnimation<Color>(availabilityColor),
-                                    ),
-                                    margin: EdgeInsets.only(right: 12),
-                                  ),
-                                  Text(
-                                    feature.getAvailability(),
-                                    style: TextStyle(height: 1.4),
-                                  ),
-                                ],
-                              )),
+                                  children: feature.isOpen()
+                                      ? <Widget>[
+                                          Container(
+                                            width: 24,
+                                            height: 24,
+                                            child: CircularProgressIndicator(
+                                              value: feature.getAvailabilityPercentage(),
+                                              strokeWidth: 4,
+                                              backgroundColor: Colors.white,
+                                              valueColor: AlwaysStoppedAnimation<Color>(availabilityColor),
+                                            ),
+                                            margin: EdgeInsets.only(right: 12),
+                                          ),
+                                          Text(
+                                            feature.getAvailabilityLabel(),
+                                            style: TextStyle(height: 1.4),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ]
+                                      : [
+                                          Container(
+                                            width: markerWidth - 16,
+                                            height: 24,
+                                            child: Text(
+                                              feature.getAvailabilityLabel(),
+                                              style: TextStyle(
+                                                  height: 2,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: 1.8),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          )
+                                        ])),
                         )),
                   ),
                 ),

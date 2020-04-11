@@ -28,6 +28,9 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
         right: 78,
         child: Container(
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(color: Colors.black26, offset: Offset.fromDirection(2, 3), blurRadius: 3),
+            ],
             borderRadius: BorderRadius.all(Radius.circular(6)),
             color: Colors.white,
           ),
@@ -63,7 +66,7 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                                 width: 10,
                                 height: 10,
                                 decoration: BoxDecoration(
-                                  color: Colors.green,
+                                  color: widget.feature.getParkingColor(),
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -75,7 +78,7 @@ class _MapMarkerDialogState extends State<MapMarkerDialog> {
                                 Icons.directions_car,
                                 size: 18,
                               ),
-                              Text('${widget.feature.getAvailability()} places',
+                              Text(' ${widget.feature.getAvailability()} places',
                                   style: TextStyle(color: Colors.black54)),
                             ],
                           ),
