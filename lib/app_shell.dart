@@ -13,16 +13,16 @@ class _AppShellState extends State<AppShell> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: HomeScreen(title: 'ParkInLille'),
-      bottomNavigationBar: BottomNavigationBar(items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.explore),
-          title: Text('Parking'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.local_parking),
-          title: Text('Voiture'),
-        ),
-      ]),
+//      bottomNavigationBar: BottomNavigationBar(items: const <BottomNavigationBarItem>[
+//        BottomNavigationBarItem(
+//          icon: Icon(Icons.explore),
+//          title: Text('Parking'),
+//        ),
+//        BottomNavigationBarItem(
+//          icon: Icon(Icons.local_parking),
+//          title: Text('Voiture'),
+//        ),
+//      ]),
     );
   }
 }
